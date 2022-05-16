@@ -141,8 +141,19 @@ def softmax_loss(x, y):
     # TODO: Copy over your solution from Assignment 1.                        #
     ###########################################################################
     # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
-
-    pass
+    
+    
+    num_train = x.shape[0]
+    num_classes = y.shape[]
+    
+    escore = np.exp(X.dot(W))
+    esum = np.sum(escore, axis=1)
+    loss = -escore[np.arange(num_train), y]/esum
+    mid_diff = (-loss/esum).reshape(-1,1).repeat(num_classes, axis=1) * escore
+    mid_diff[np.arange(num_train), y] = loss.copy()
+    dW = X.T.dot(mid_diff)/num_train
+    loss = np.sum(loss)/num_train + reg*np.sum(W*W) 
+    dW += reg*2*W 
 
     # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
     ###########################################################################
